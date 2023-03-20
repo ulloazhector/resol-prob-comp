@@ -1,0 +1,6 @@
+- Cambiar los tipos a "int m[ROWS][COLS]"
+- Recordar que las matrices debían ser cuadradas para poder garantizar que la multiplicación está definida
+- Si ROWS y COLS son constantes entonces no es necesario que sean parámetros de las funciones.
+- Cambiar los nombres de los archivos.
+
+Nota: Reentregar
