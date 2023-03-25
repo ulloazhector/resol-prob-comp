@@ -1,6 +1,12 @@
 - Cambiar los tipos a "int m[ROWS][COLS]"
+    -- listo
 - Recordar que las matrices debían ser cuadradas para poder garantizar que la multiplicación está definida
+    -- listo
 - Si ROWS y COLS son constantes entonces no es necesario que sean parámetros de las funciones.
+    -- la definicion de la dimensión de las matrices es una constante solo para main, las funciones de functions son independientes de esas constantes, por eso reciben el size como parámetro.
 - Cambiar los nombres de los archivos.
+    -- listo
+
+(comp: >>gcc *.c -lm -o main)
 
 Nota: Reentregar
