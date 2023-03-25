@@ -11,16 +11,13 @@ int main(int argc, char const *argv[]) {
         exit(-1);
     }
 
-    int rows, cols;
-    fscanf(fptr, "%d%d", &rows, &cols);
-
     TMatrix matrix;
-    matrix.rows = rows;
-    matrix.cols = cols;
+    fscanf(fptr, "%d%d", &matrix.rows, &matrix.cols);
 
     callocMatrix(&matrix);
+    loadMatrixFromFile(&matrix, fptr);
 
-    printf("matrix: %d\n", matrix.values[0][0]);
+    showMatrix(matrix);
 
     free(matrix.values);
     fclose(fptr);
