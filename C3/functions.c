@@ -25,11 +25,8 @@ void showMatrix(TMatrix matrix) {
 }
 
 void loadMatrixFromFile(TMatrix *matrix, FILE *fptr) {
-    int curr;
     for (size_t i = 0; i < matrix->rows; i++)
         for (size_t j = 0; j < matrix->cols; j++)
-            if (!feof(fptr)) {
-                fscanf(fptr, "%d", &curr);
-                matrix->values[i][j] = curr;
-            }
+            if (!feof(fptr)) 
+                fscanf(fptr, "%d", &matrix->values[i][j]);
 }
