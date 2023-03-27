@@ -12,5 +12,7 @@ typedef struct {
 void callocMatrix(TMatrix *matrix);
 void showMatrix(TMatrix matrix);
 void loadMatrixFromFile(TMatrix *matrix, FILE *fptr);
+void scalarProductMatrix(TMatrix *matrix, float scalar);
+TMatrix mulMatrix(TMatrix m1, TMatrix m2);
 
 #endif /* functions_h */
