@@ -1,14 +1,14 @@
 #include "functions.h"
 
 void callocMatrix(TMatrix *matrix) {
-    matrix->values = (int **)calloc(matrix->rows, sizeof(int *));
+    matrix->values = (float **)calloc(matrix->rows, sizeof(float *));
     if (!matrix->values) {
         printf("error\n");
         exit(-1);
     }
 
     for (size_t i = 0; i < matrix->rows; i++) {
-        matrix->values[i] = (int *)calloc(matrix->cols, sizeof(int));
+        matrix->values[i] = (float *)calloc(matrix->cols, sizeof(float));
         if (!matrix->values[i]) {
             printf("error\n");
             exit(-1);
@@ -19,7 +19,7 @@ void callocMatrix(TMatrix *matrix) {
 void showMatrix(TMatrix matrix) {
     for (size_t i = 0; i < matrix.rows; i++) {
         for (size_t j = 0; j < matrix.cols; j++)
-            printf("%d\t", matrix.values[i][j]);
+            printf("%.3f\t", matrix.values[i][j]);
         printf("\n");
     }
 }
@@ -31,7 +31,7 @@ void loadMatrixFromFile(TMatrix *matrix, FILE *fptr) {
     for (size_t i = 0; i < matrix->rows; i++)
         for (size_t j = 0; j < matrix->cols; j++)
             if (!feof(fptr))
-                fscanf(fptr, "%d", &matrix->values[i][j]);
+                fscanf(fptr, "%f", &matrix->values[i][j]);
 
     fclose(fptr);
 }
@@ -58,6 +58,28 @@ TMatrix mulMatrix(TMatrix m1, TMatrix m2) {
             for (size_t k = 0; k < m1.cols; k++)
                 acum += m1.values[i][k] * m2.values[k][j];
             res.values[i][j] = acum;
+        }
+
+    return res;
+}
+
+TMatrix gaussianEliminationMatrix(TMatrix m1) {
+    TMatrix res;
+    res.rows = m1.rows;
+    res.cols = m1.cols;
+
+    callocMatrix(&res);
+
+    for (size_t i = 0; i < m1.rows; i++)
+        for (size_t j = 0; j < m1.cols; j++)
+            res.values[i][j] = m1.values[i][j];
+
+    for (size_t i = 0; i < res.rows - 1; i++)
+        for (size_t j = i + 1; j < res.rows; j++) {
+            float factor = res.values[j][i] / res.values[i][i];
+
+            for (size_t k = 0; k < res.cols; k++)
+                res.values[j][k] = res.values[j][k] - res.values[i][k] * factor;
         }
 
     return res;
