@@ -119,12 +119,34 @@ void setElem(matrix *m, coordinate c, int value) {
         m->cols = c.col;
     }
 
+    // find if coordinate exists
+    int isInMatrix = false;
+    for (size_t j = 0; j < m->data_size_filled; j++) {
+        if (m->data[j].c.row == c.row && m->data[j].c.col == c.col)
+            isInMatrix = true;
+    }
+
+    // memory allocation if necessary
     if (m->data_size == 0) {
         m->data = (elem *)malloc(4 * sizeof(elem));
         m->data_size = 4;
-    } else if (m->data_size == m->data_size_filled) {
+    } else if ((m->data_size == m->data_size_filled)) {
         m->data = (elem *)realloc(m->data, 2 * m->data_size * sizeof(elem));
         m->data_size *= 2;
+    }
+
+    // search index of new element
+    int i = m->data_size_filled;
+    while (c.row < m->data[i - 1].c.row) {
+        if (!isInMatrix)
+            m->data[i] = m->data[i - 1];
+        i--;
+    }
+
+    while (i > 0 && c.row == m->data[i - 1].c.row && c.col < m->data[i - 1].c.col) {
+        if (!isInMatrix)
+            m->data[i] = m->data[i - 1];
+        i--;
     }
 
     if (!m->data) {
@@ -132,9 +154,12 @@ void setElem(matrix *m, coordinate c, int value) {
         exit(-1);
     }
 
-    m->data[m->data_size_filled].c = c;
-    m->data[m->data_size_filled].data = value;
-    m->data_size_filled++;
+    // put new element in matrix
+    m->data[isInMatrix ? i - 1 : i].c = c;
+    m->data[isInMatrix ? i - 1 : i].data = value;
+
+    if (!isInMatrix)
+        m->data_size_filled++;
 }
 
 void erase(matrix m, coordinate c) {
