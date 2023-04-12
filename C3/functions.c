@@ -84,3 +84,58 @@ TMatrix gaussianEliminationMatrix(TMatrix m1) {
 
     return res;
 }
+
+// return -1 if not in data array
+int findIndex(matrix m, coordinate c) {
+    for (size_t i = 0; i < m.data_size; i++) {
+        if (c.row == m.data[i].c.row && c.col == m.data[i].c.col)
+            return i;
+    }
+    return -1;
+}
+
+bool isDef(matrix m, coordinate c) {
+    if (c.row > m.rows || c.col > m.cols)
+        return false;
+    return true;
+}
+
+// int getElem(matrix m, coordinate c) {
+
+//     // check return value
+//     if (!isDef(m, c))
+//         return;
+
+//     int i = findIndex(m, c);
+//     if (i != -1)
+//         return m.data[i].data;
+
+//     return 0;
+// }
+
+void setElem(matrix *m, coordinate c, int value) {
+    if (!isDef(*m, c)) {
+        m->rows = c.row;
+        m->cols = c.col;
+    }
+
+    if (m->data_size == 0) {
+        m->data = (elem *)malloc(4 * sizeof(elem));
+        m->data_size = 4;
+    } else if (m->data_size == m->data_size_filled) {
+        m->data = (elem *)realloc(m->data, 2 * m->data_size * sizeof(elem));
+        m->data_size *= 2;
+    }
+
+    if (!m->data) {
+        printf("Memory allocation failed :(\n");
+        exit(-1);
+    }
+
+    m->data[m->data_size_filled].c = c;
+    m->data[m->data_size_filled].data = value;
+    m->data_size_filled++;
+}
+
+void erase(matrix m, coordinate c) {
+}

@@ -4,38 +4,40 @@
 #include "main.h"
 
 int main(int argc, char const *argv[]) {
-    FILE *fptr_m1 = fopen(argv[1], "r");
-    FILE *fptr_m2 = fopen(argv[2], "r");
-    FILE *fptr_m3 = fopen(argv[3], "r");
 
-    if (!fptr_m1 || !fptr_m2 || !fptr_m3) {
-        printf("error\n");
-        exit(-1);
+    matrix myMatrix;
+    myMatrix.data_size = 0;
+    myMatrix.rows = 0;
+    myMatrix.cols = 0;
+
+    coordinate pos;
+
+    pos.row = 1;
+    pos.col = 4;
+    setElem(&myMatrix, pos, 3);
+    pos.row = 3;
+    pos.col = 4;
+    setElem(&myMatrix, pos, 6);
+    pos.row = 4;
+    pos.col = 4;
+    setElem(&myMatrix, pos, 9);
+    pos.row = 0;
+    pos.col = 0;
+    setElem(&myMatrix, pos, 4);
+    pos.row = 0;
+    pos.col = 1;
+    setElem(&myMatrix, pos, 5);
+
+    for (size_t i = 0; i < myMatrix.data_size_filled; i++) {
+        printf("myMatrix.data_size_filled: %d\n", myMatrix.data_size_filled);
+        printf("myMatrix.data_size: %d\n", myMatrix.data_size);
+        printf("myMatrix.rows: %d\n", myMatrix.rows);
+        printf("myMatrix.cols: %d\n", myMatrix.cols);
+        printf("myMatrix.data[i].c.row: %d\n", myMatrix.data[i].c.row);
+        printf("myMatrix.data[i].c.col: %d\n", myMatrix.data[i].c.col);
+        printf("myMatrix.data[i].data: %d\n", myMatrix.data[i].data);
+        printf("\n");
     }
 
-    TMatrix matrix1, matrix2, matrix3;
-    loadMatrixFromFile(&matrix1, fptr_m1);
-    loadMatrixFromFile(&matrix2, fptr_m2);
-    loadMatrixFromFile(&matrix3, fptr_m3);
-
-    // showMatrix(matrix1);
-    // printf("\n");
-
-    // showMatrix(matrix2);
-    // printf("\n");
-
-    showMatrix(matrix3);
-    printf("\n");
-
-    TMatrix mul = mulMatrix(matrix1, matrix2);
-    // showMatrix(mul);
-
-    TMatrix diag = gaussianEliminationMatrix(matrix3);
-    showMatrix(diag);
-
-    free(matrix1.values);
-    free(matrix2.values);
-    free(mul.values);
-    free(diag.values);
     return 0;
 }
