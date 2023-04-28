@@ -1,0 +1,5 @@
+- el manejo de error debiera hacerse haciendo fprintf sobre el stderr y forzando un abort controlado
+- en la multiplicación se aborta sin ningún mensaje de error
+- no posee operaciones para liberar la memoria
+
+calificación: 8 (ocho)
