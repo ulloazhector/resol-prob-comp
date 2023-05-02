@@ -12,12 +12,16 @@ class Polynomial {
     int coef[MAX_SIZE];
 
 public:
+    // constructors
     Polynomial(int grade, ...);
     Polynomial(int grade, int coef[]);
     Polynomial(Polynomial &p);
 
-    friend Polynomial operator+ (Polynomial a, Polynomial b);
-    friend Polynomial operator* (Polynomial a, Polynomial b);
+    // methods
+    friend Polynomial operator+(Polynomial a, Polynomial b);
+    friend Polynomial operator*(Polynomial a, Polynomial b);
+    friend Polynomial operator*(int a, Polynomial b);
+    friend Polynomial operator*(Polynomial a, int b);
     void show();
     ~Polynomial();
 };

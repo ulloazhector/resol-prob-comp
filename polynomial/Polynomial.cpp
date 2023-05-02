@@ -40,7 +40,8 @@ Polynomial::~Polynomial() {
 
 void Polynomial::show() {
     for (size_t i = 0; i < grade + 1; i++)
-        cout << (i > 0 ? " + " : "") << "(" << coef[i] << ")" << "x^" << i;
+        cout << (i > 0 ? " + " : "") << "(" << coef[i] << ")"
+             << "x^" << i;
     cout << endl;
 }
 
@@ -68,5 +69,21 @@ Polynomial operator*(Polynomial a, Polynomial b) {
             newCoef[i + b.grade] += a.coef[i + j] * b.coef[b.grade - j];
 
     Polynomial res(newGrade, newCoef);
+    return res;
+}
+
+Polynomial operator*(int a, Polynomial b) {
+    int newCoef[b.grade + 1];
+    for (size_t i = 0; i < b.grade + 1; i++)
+        newCoef[i] = a * b.coef[i];
+    Polynomial res(b.grade, newCoef);
+    return res;
+}
+
+Polynomial operator*(Polynomial a, int b) {
+    int newCoef[a.grade + 1];
+    for (size_t i = 0; i < a.grade + 1; i++)
+        newCoef[i] = b * a.coef[i];
+    Polynomial res(a.grade, newCoef);
     return res;
 }
