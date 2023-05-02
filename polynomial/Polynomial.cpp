@@ -56,25 +56,28 @@ Polynomial operator+(Polynomial a, Polynomial b) {
 }
 
 Polynomial operator*(Polynomial a, Polynomial b) {
-    int newGrade = a.grade + b.grade - 1;
+    int newGrade = a.grade + b.grade;
     int newCoef[newGrade + 1];
 
     int sum;
 
     cout << "a.grade: " << a.grade << endl;
-    cout << "b.grade: " << b.grade << endl
+    cout << "b.grade: " << b.grade << endl;
+    cout << "newGrade: " << newGrade << endl
          << endl;
 
     for (int i = 0; i < b.grade + 1; i++) {
+        cout << "coef: " << i;
         for (int j = 0; j <= i && j < a.grade + 1; j++) {
-            cout << "a_" << j << " b_" << i - j << " + ";
+            cout << " a_" << j << " b_" << i - j << " + ";
         }
         cout << endl;
     }
 
     for (int i = 1; i < a.grade + 1; i++) {
-        for (int j =0; j < b.grade + 1 && i + j < a.grade + 1; j++) {
-            cout << "a_" << i + j << " b_" << b.grade - j << " + ";
+        cout << "coef: " << i + b.grade;
+        for (int j = 0; j < b.grade + 1 && i + j < a.grade + 1; j++) {
+            cout << " a_" << i + j << " b_" << b.grade - j << " + ";
         }
         cout << endl;
     }
