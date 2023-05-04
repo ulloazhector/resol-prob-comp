@@ -60,13 +60,9 @@ Polynomial operator*(Polynomial a, Polynomial b) {
     int newGrade = a.grade + b.grade;
     int newCoef[newGrade + 1] = {0};
 
-    for (int i = 0; i < b.grade + 1; i++)
-        for (int j = 0; (j <= i) && (j < a.grade + 1); j++)
-            newCoef[i] += a.coef[j] * b.coef[i - j];
-
-    for (int i = 1; i < a.grade + 1; i++)
-        for (int j = 0; j < (b.grade + 1) && (i + j < a.grade + 1); j++)
-            newCoef[i + b.grade] += a.coef[i + j] * b.coef[b.grade - j];
+    for (size_t i = 0; i < a.grade + 1; i++)
+        for (size_t j = 0; j < b.grade + 1; j++)
+            newCoef[i + j] += a.coef[i] * b.coef[j];
 
     Polynomial res(newGrade, newCoef);
     return res;
