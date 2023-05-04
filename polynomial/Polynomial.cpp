@@ -47,12 +47,25 @@ void Polynomial::show() {
 
 Polynomial operator+(Polynomial a, Polynomial b) {
     int newGrade = (a.grade > b.grade) ? a.grade : b.grade;
-    int newCoef[newGrade + 1];
+    int newCoef[newGrade + 1] = {0};
 
     for (size_t i = 0; i < newGrade + 1; i++)
         newCoef[i] = a.coef[i] + b.coef[i];
 
     Polynomial res(newGrade, newCoef);
+    return res;
+}
+
+Polynomial operator+(int a, Polynomial b) {
+    b.coef[0] += a;
+    
+    Polynomial res(b.grade, b.coef);
+    return res;
+}
+Polynomial operator+(Polynomial a, int b) {
+    a.coef[0] += b;
+
+    Polynomial res(a.grade, a.coef);
     return res;
 }
 

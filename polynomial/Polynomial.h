@@ -19,6 +19,9 @@ public:
 
     // methods
     friend Polynomial operator+(Polynomial a, Polynomial b);
+    friend Polynomial operator+(int a, Polynomial b);
+    friend Polynomial operator+(Polynomial a, int b);
+
     friend Polynomial operator*(Polynomial a, Polynomial b);
     friend Polynomial operator*(int a, Polynomial b);
     friend Polynomial operator*(Polynomial a, int b);
